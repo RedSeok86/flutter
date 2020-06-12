@@ -6,11 +6,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'AppBar',
-     home: MyPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blue
+      ),
+      home: MyPage(),
     );
-    
   }
 }
 
@@ -19,25 +21,34 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Snack Bar'),
+        title: Text('SnackBar'),
         centerTitle: true,
       ),
-      body: Builder(builder: (BuildContext ctx) {
-        return Center(
-          child: FlatButton( // 화초면에 그려진다
-            child: Text('show me',
-              style: TextStyle(
-                  color: Colors.white
-              ),
-            ),
-            color: Colors.red,
-            onPressed: (){
-              Scaffold.of(ctx).showSnackBar(SnackBar(content: Text('hellow')
-              ));
-            },
-          ),
-        );
-      },)
+      body: MySnackBar(),
     );
   }
 }
+ class MySnackBar extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     return Center(
+       child: RaisedButton(
+         child: Text('SHow me'),
+         color: Colors.red,
+         onPressed: (){
+           Scaffold.of(context).showSnackBar(SnackBar(content: Text('hellow',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white
+            ),
+           ),
+             backgroundColor: Colors.teal,
+             duration: Duration(microseconds: 10000),
+           ),
+           );
+         },
+       ),
+     );
+
+   }
+ }
