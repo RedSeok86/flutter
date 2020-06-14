@@ -1,54 +1,57 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() =>runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AppBar',
       debugShowCheckedModeBanner: false,
+      title: 'AppBar',
       theme: ThemeData(
-        primaryColor: Colors.blue
+        primarySwatch: Colors.red
       ),
-      home: MyPage(),
+      home: FirstPage(),
     );
   }
 }
 
-class MyPage extends StatelessWidget {
+
+class FirstPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context2) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SnackBar'),
-        centerTitle: true,
+        title: Text('First page'),
       ),
-      body: MySnackBar(),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Go to the Second page'),
+          onPressed: (){
+            Navigator.push(context2, MaterialPageRoute(
+                builder: (_) => SecondPage()));
+          }
+        ),
+      ),
     );
   }
 }
- class MySnackBar extends StatelessWidget {
-   @override
-   Widget build(BuildContext context) {
-     return Center(
-       child: RaisedButton(
-         child: Text('SHow me'),
-         color: Colors.red,
-         onPressed: (){
-           Scaffold.of(context).showSnackBar(SnackBar(content: Text('hellow',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white
-            ),
-           ),
-             backgroundColor: Colors.teal,
-             duration: Duration(microseconds: 10000),
-           ),
-           );
-         },
-       ),
-     );
 
-   }
- }
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctx) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second page'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Go to the First page'),
+          onPressed: (){
+            Navigator.pop(ctx);
+          },
+        ),
+      ),
+    );
+  }
+}
