@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() =>runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,40 +11,46 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
-      home: Mypage(),
+      home: FirstPage(),
     );
   }
 }
 
 
-class Mypage extends StatelessWidget {
+class FirstPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context2) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Appbar icon menu'),
-        centerTitle: true,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            print('menu button is cliked');
+        title: Text('First page'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Go to the Second page'),
+          onPressed: (){
+            Navigator.push(context2, MaterialPageRoute(
+                builder: (_) => SecondPage()));
+          }
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctx) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second page'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Go to the First page'),
+          onPressed: (){
+            Navigator.pop(ctx);
           },
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              print('menu button is shopping_cart');
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              print('menu button is search');
-            },
-          ),
-        ],
       ),
     );
   }
